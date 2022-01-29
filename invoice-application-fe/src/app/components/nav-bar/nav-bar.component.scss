@@ -1,0 +1,139 @@
+//------------ Buttons --------------
+.compact-nav-button
+{
+  width: 70vw;
+  position: relative;
+  background-color: white;
+  border-style:none;
+  text-align: left;
+  overflow: hidden;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#show-menu-button
+{
+  border-radius: 2px;
+}
+
+.hover-button:hover
+{
+  background-color:  #3f7bb5a8;
+  cursor:pointer;
+}
+
+.larg-nav-buttons
+{
+  z-index: 3 !important;
+}
+
+//--------------- active buttons ---------------------
+.active
+{
+  background-color: white;
+  color: black;
+  font-weight: bolder;
+}
+
+.active-grey
+{
+  background-color: lightgray;
+  color: black;
+  font-weight: bolder;
+}
+
+//--------- Toolbar --------------
+.large-nav-bar
+{
+  height: 112px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2 !important;
+  width: 100% !important;
+}
+
+
+
+//--------------------- compact nav ------------------
+.compact-nav-container {
+  width: 100% !important;
+  height: 2% !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2 !important;
+}
+
+mat-drawer-content
+{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: white;
+}
+
+#menu-list-container
+{
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  width: auto;
+  left: 0;
+  position:fixed;
+  z-index: 10 !important;
+  display: none;
+  overflow: hidden;
+
+  button{
+    .mat-icon
+    {
+      vertical-align: middle;
+      align-items: left;
+      padding-right: 5px;
+      margin-bottom: 5px;
+    }
+
+    span{
+      font-size: 100%;
+    }
+  }
+
+
+}
+
+#gray-background
+{
+  background-color: #0009;
+  width: 400vw;
+  height: 100%;
+  position: fixed;
+  z-index: 2 !important;
+  opacity: 0.0;
+  display: none;
+  overflow: hidden;
+  overflow-y: hidden;
+}
+
+
+
+
+
+//-------Show compact or normal navbar ------------
+@media only screen and (min-width: 285.70px) {
+  .compact-nav-container {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 285.69px) {
+  .large-nav-bar {
+    display: none;
+  }
+}
+
+//------- Formatting --------------
+
+.margin-right
+{
+  margin-right: 5px !important;
+}

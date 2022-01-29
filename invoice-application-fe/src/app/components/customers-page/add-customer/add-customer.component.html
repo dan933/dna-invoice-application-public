@@ -1,0 +1,22 @@
+<form id="addCustomerForm" [formGroup]="addCustomerForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline">
+    <mat-label>First Name</mat-label>
+    <input matInput placeholder="eg. John" formControlName="firstName">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Last Name</mat-label>
+    <input matInput placeholder="eg. Smith" formControlName="lastName">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Company</mat-label>
+    <input matInput placeholder="eg. Acme" formControlName="companyName">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput placeholder="eg. john@example.com" formControlName="emailAddress">
+  </mat-form-field>
+  <br>
+  <button mat-raised-button color="primary">Add Customer</button>
+</form>
+
+

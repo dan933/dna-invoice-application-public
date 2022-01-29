@@ -1,0 +1,100 @@
+#add-invoice-item{
+  background-color: green;
+  color: white;
+  margin-top: 5px;
+
+  &:hover{
+    background-color: rgba(0, 128, 0, 0.685);
+  }
+}
+
+td input
+{
+  font-size: 30px;
+  width: 300px;
+}
+
+#invoice-header{
+  margin-bottom: 10px;
+  position: relative;
+  width: 98vw;
+  min-width:min-content;
+  border: 1.5px solid black;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  display:flex;
+  flex-flow:row wrap;
+  gap: 10px;
+  align-items: left;
+  justify-content: left;
+  //overflow: auto;
+
+  div{
+    padding:10px;
+
+    span{
+      padding: 10px;
+      width: auto;  /* Or whatever */
+      height:auto; /* Or whatever */
+      margin: auto;  /* Magic! */
+      white-space: nowrap;
+
+      label{
+        font-weight: bold;
+      }
+
+    }
+  }
+}
+
+form{
+  .mat-form-field{
+    padding-right: 10px;
+  }
+
+  label{
+    padding-right: 10px;
+    font-weight: bold;
+  }
+
+  .mat-radio-group{
+    .mat-radio-button{
+      padding-right: 10px;
+    }
+  }
+}
+
+
+
+div.invoice-footer{
+  margin: 10px;
+
+  div.invoice-calculations{
+    margin-left: auto;
+    margin-right: 0;
+    width: max-content;
+    border: black solid 0.5px;
+    padding: 10px;
+    text-align: right;
+    box-shadow: 3px 3px;
+    box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
+                0px 8px 10px 1px rgb(0 0 0 / 14%),
+                0px 3px 14px 2px rgb(0 0 0 / 12%);
+  }
+}
+
+
+#invoice-table{
+  th{
+    top: 112px !important;
+    z-index: 1 !important;
+  }
+
+  @media only screen and (max-width: 285.69px) {
+    th
+    {
+      top: 56px !important;
+    }
+  }
+}
+
