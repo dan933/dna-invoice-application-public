@@ -1,3 +1,3 @@
-# DNA-Invoice-Application
+# About
 
-This Application is an Invoicing Application for DNA District Services
+Full stack invoicing application ( dotnet API, Angular Front End, MS SQL Server)
