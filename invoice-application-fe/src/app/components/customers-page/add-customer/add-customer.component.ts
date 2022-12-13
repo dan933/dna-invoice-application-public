@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 
 import { Customer } from 'src/app/models/customers-model';
@@ -24,7 +24,7 @@ export class AddCustomerComponent implements OnInit {
   })
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public customersService: CustomersService,
     private _snackBar: MatSnackBar,
     private _popUpService:PopUpService,

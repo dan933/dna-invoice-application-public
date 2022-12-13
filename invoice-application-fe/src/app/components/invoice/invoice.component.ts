@@ -3,7 +3,7 @@ import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InvoicesService } from 'src/app/services/invoices.service';
 import { DateAdapter } from '@angular/material/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { CurrencyPipe, formatCurrency, formatDate } from '@angular/common';
 import { CustomersService } from 'src/app/services/customers.service';
 import { PopUpService } from 'src/app/services/pop-up.service';
@@ -67,7 +67,7 @@ export class InvoiceComponent implements OnInit {
     public invoicesService: InvoicesService,
     public customerService: CustomersService,
     private dateAdapter: DateAdapter<Date>,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public popUpService: PopUpService,
     private _matSnackBar:MatSnackBar,
   ) {

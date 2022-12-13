@@ -1,5 +1,5 @@
 import { Component, Input, AfterViewInit, OnInit, OnChanges, AfterContentChecked, AfterContentInit  } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { CustomersService } from 'src/app/services/customers.service';
 import { NavBarComponent } from '../../nav-bar/nav-bar.component';
 import { CustomerPageComponent } from '../customer-page.component';
@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class EditCustomerComponent implements OnInit  {
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public customerService: CustomersService,
     public navServices:NavBarComponent,
     private _snackBar: MatSnackBar,
@@ -26,7 +26,7 @@ export class EditCustomerComponent implements OnInit  {
 
   firstName:string = ""
 
-  editCustomerFromGroup: FormGroup = this.fb.group({
+  editCustomerFromGroup: UntypedFormGroup = this.fb.group({
       firstName: this.fb.control(""),
       lastName: this.fb.control(""),
       companyName: this.fb.control(""),
