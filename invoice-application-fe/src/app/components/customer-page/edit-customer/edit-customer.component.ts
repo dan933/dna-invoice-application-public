@@ -5,7 +5,7 @@ import { NavBarComponent } from '../../nav-bar/nav-bar.component';
 import { CustomerPageComponent } from '../customer-page.component';
 
 
-import { MatSnackBar } from '@angular/material/snack-bar';
+// import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 @Component({
   selector: 'app-edit-customer',
@@ -18,7 +18,7 @@ export class EditCustomerComponent implements OnInit  {
     private fb: UntypedFormBuilder,
     public customerService: CustomersService,
     public navServices:NavBarComponent,
-    private _snackBar: MatSnackBar,
+    // private _snackBar: MatSnackBar,
     public customerPageService:CustomerPageComponent
   ) { }
 
@@ -71,14 +71,14 @@ export class EditCustomerComponent implements OnInit  {
 
           let message: string = responseObject.message;
 
-          isSuccess == true ? this._snackBar.open(message, "Dismiss") : null
+          // isSuccess == true ? this._snackBar.open(message, "Dismiss") : null
 
           this.customerPageService.getCustomerDetails();
 
         }, (error) => {
           console.log(error)
           this.navServices.hidePopups();
-          this._snackBar.open(error.message,"Dismiss")
+          // this._snackBar.open(error.message,"Dismiss")
         });
     }
   }

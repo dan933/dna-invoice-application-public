@@ -1,6 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
+// import { MatLegacyTable as MatTable } from '@angular/material/legacy-table';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Customer } from 'src/app/models/customers-model';
@@ -8,8 +8,7 @@ import { Customer } from 'src/app/models/customers-model';
 import { CustomersService } from 'src/app/services/customers.service';
 import { InvoicesService } from 'src/app/services/invoices.service';
 import { ToggleSortService } from 'src/app/services/toggle-sort.service';
-
-import { MatSnackBar } from '@angular/material/snack-bar';
+// import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { PageEvent } from '@angular/material/paginator';
 
 export interface CustomerInvoices {
@@ -56,7 +55,7 @@ export class CustomerPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public invoicesService: InvoicesService,
-    private _snackBar: MatSnackBar,
+    // private _snackBar: MatSnackBar,
     public toggleService:ToggleSortService
   ) { }
 
@@ -137,7 +136,7 @@ export class CustomerPageComponent implements OnInit {
 
         this.router.navigate([`/invoice/${invoiceID}`])
 
-        this._snackBar.open(message,"Dismiss")
+        // this._snackBar.open(message,"Dismiss")
 
       }, () => { alert("api is down") }
     )

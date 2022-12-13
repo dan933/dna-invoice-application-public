@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input, Inject } from '@angular/core';
-import { MatTable } from '@angular/material/table';
+// import { MatLegacyTable as MatTable } from '@angular/material/legacy-table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InvoicesService } from 'src/app/services/invoices.service';
 import { DateAdapter } from '@angular/material/core';
@@ -7,7 +7,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { CurrencyPipe, formatCurrency, formatDate } from '@angular/common';
 import { CustomersService } from 'src/app/services/customers.service';
 import { PopUpService } from 'src/app/services/pop-up.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+// import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
@@ -58,8 +58,8 @@ export class InvoiceComponent implements OnInit {
 
 
 
-  @ViewChild(MatTable)
-  table!: MatTable<InvoiceDetails>;
+  // @ViewChild(MatTable)
+  // table!: MatTable<InvoiceDetails>;
 
   constructor(
     private route: ActivatedRoute,
@@ -69,7 +69,7 @@ export class InvoiceComponent implements OnInit {
     private dateAdapter: DateAdapter<Date>,
     public fb: UntypedFormBuilder,
     public popUpService: PopUpService,
-    private _matSnackBar:MatSnackBar,
+    // private _matSnackBar:MatSnackBar,
   ) {
     this.dateAdapter.setLocale('en-GB');
   }
@@ -123,7 +123,7 @@ export class InvoiceComponent implements OnInit {
       price: 0
     });
 
-    this.table.renderRows();
+    // this.table.renderRows();
   }
 
   removeItem(item: any) {
@@ -137,7 +137,7 @@ export class InvoiceComponent implements OnInit {
 
     this.dataSource = this.dataSource.filter(obj => obj !== item);
 
-    this.table.renderRows();
+    // this.table.renderRows();
   }
 
   save() {
@@ -167,19 +167,19 @@ export class InvoiceComponent implements OnInit {
 
           newItems.forEach((item, index) => { item.id = invoiceDatailsArray[index].id, console.log(item) });
 
-          this._matSnackBar.open(apiData.message, "Dismiss");
+          // this._matSnackBar.open(apiData.message, "Dismiss");
         }, (error) => {
-          this._matSnackBar.open(error.message, "Dismiss");
+          // this._matSnackBar.open(error.message, "Dismiss");
         }) : null;
 
     existingItems.length > 0 ? this.invoicesService.editInvoiceDetail(existingItems)
       .subscribe(data => {
         let apiData: any = data;
-        this._matSnackBar.open(apiData.message, "Dismiss");
+        // this._matSnackBar.open(apiData.message, "Dismiss");
 
       },
       (error) => {
-        this._matSnackBar.open(error.message, "Dismiss");
+        // this._matSnackBar.open(error.message, "Dismiss");
       }) : null;
 
 

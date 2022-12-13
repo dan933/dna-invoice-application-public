@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PopUpService } from 'src/app/services/pop-up.service';
 import { InvoicesService } from 'src/app/services/invoices.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+// import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { CustomerPageComponent } from 'src/app/components/customer-page/customer-page.component';
 
 
@@ -18,7 +18,7 @@ export class DeleteInvoiceComponent implements OnInit {
     private invoicesService: InvoicesService,
     private route: ActivatedRoute,
     private router: Router,
-    private _snackBar: MatSnackBar,
+    // private _snackBar: MatSnackBar,
     public _customerPage:CustomerPageComponent
   ) { }
 
@@ -46,11 +46,11 @@ export class DeleteInvoiceComponent implements OnInit {
 
         this.router.navigate([`/customer/${this.customerId}`])
 
-        this._snackBar.open(response, "Dismiss");
+        // this._snackBar.open(response, "Dismiss");
 
       }, (error) => {
         this._popUpService.hidePopups();
-        this._snackBar.open(error.message, "Dismiss");
+        // this._snackBar.open(error.message, "Dismiss");
     })
   }
 

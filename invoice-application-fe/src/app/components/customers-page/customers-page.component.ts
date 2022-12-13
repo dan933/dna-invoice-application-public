@@ -1,6 +1,6 @@
-import { isNull } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+// import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CustomersService } from 'src/app/services/customers.service';
 import { ToggleSortService } from 'src/app/services/toggle-sort.service';

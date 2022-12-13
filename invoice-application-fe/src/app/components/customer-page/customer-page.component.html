@@ -41,7 +41,7 @@
     <app-delete-customer></app-delete-customer>
   </div>
 
-  <mat-form-field appearance="standard">
+  <mat-form-field appearance="outline">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" (change)="getCustomerInvoices()" placeholder="Ex. Joe" #input>
   </mat-form-field>
@@ -85,7 +85,7 @@
       <td mat-cell *matCellDef="let element">
         <input type="checkbox" [attr.checked] = "element.gst == true ? 'checked':null"></td>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-table" (click)="navInvoice(row.id)"></tr>
   </table>
   <mat-paginator

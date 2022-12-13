@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CustomersService } from 'src/app/services/customers.service';
 import { NavBarComponent } from '../../nav-bar/nav-bar.component';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
+// import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 @Component({
   selector: 'app-delete-customer',
@@ -19,7 +19,7 @@ export class DeleteCustomerComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public navBarServices: NavBarComponent,
-    private _snackBar: MatSnackBar,
+    // private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -46,10 +46,10 @@ export class DeleteCustomerComponent implements OnInit {
 
         this.router.navigate([`/customers`])
 
-        isSuccess == true ? this._snackBar.open(message,"Dismiss") : null
+        // isSuccess == true ? this._snackBar.open(message,"Dismiss") : null
       }, (error) => {
         this.navBarServices.hidePopups();
-        this._snackBar.open(error.message, "Dismiss");
+        // this._snackBar.open(error.message, "Dismiss");
       });
 
 
