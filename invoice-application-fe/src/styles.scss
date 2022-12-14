@@ -6,8 +6,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 //----------- Table Styling ----------------------
 .table-container
 {
-  height: auto;
-  width: 100%;
+  max-width: 100%;
   padding:10px;
 
   .hover-table:hover td{
