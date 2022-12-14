@@ -7,7 +7,8 @@ import { Customer } from 'src/app/models/customers-model';
 import { CustomersPageComponent } from 'src/app/components/customers-page/customers-page.component'
 import { CustomersService } from 'src/app/services/customers.service';
 import { PopUpService } from 'src/app/services/pop-up.service';
-// import {MatLegacySnackBar as MatSnackBar} from '@angular/material/legacy-snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 
 @Component({
@@ -26,7 +27,7 @@ export class AddCustomerComponent implements OnInit {
   constructor(
     private fb: UntypedFormBuilder,
     public customersService: CustomersService,
-    // private _snackBar: MatSnackBar,
+    private _snackBar: MatSnackBar,
     private _popUpService:PopUpService,
     private _customersPage:CustomersPageComponent
   ) { }
@@ -60,7 +61,7 @@ export class AddCustomerComponent implements OnInit {
           this._popUpService.hidePopups();
           response = data;
           response = response.message;
-          // this._snackBar.open(response, "Dismiss");
+          this._snackBar.open(response, "Dismiss");
           this._customersPage.ngOnInit();
         });
 

@@ -88,6 +88,7 @@ export class CustomerPageComponent implements OnInit {
         this.customerInformation = data;
         this.customerInformation = this.customerInformation.data;
         this.customerInformation.customerCode = this.customerInformation.companyName[0].toUpperCase() + this.customerInformation.id
+        console.log(this.customerInformation)
       }, () => alert("api is down"));
   }
 

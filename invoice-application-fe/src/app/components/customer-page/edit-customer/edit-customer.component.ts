@@ -1,11 +1,9 @@
-import { Component, Input, AfterViewInit, OnInit, OnChanges, AfterContentChecked, AfterContentInit  } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit  } from '@angular/core';
+import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomersService } from 'src/app/services/customers.service';
 import { NavBarComponent } from '../../nav-bar/nav-bar.component';
 import { CustomerPageComponent } from '../customer-page.component';
-
-
-// import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 @Component({
   selector: 'app-edit-customer',
@@ -14,37 +12,37 @@ import { CustomerPageComponent } from '../customer-page.component';
 })
 export class EditCustomerComponent implements OnInit  {
 
+  @Input() editCustomerInformation!: any;
+
   constructor(
     private fb: UntypedFormBuilder,
     public customerService: CustomersService,
     public navServices:NavBarComponent,
-    // private _snackBar: MatSnackBar,
+    private _snackBar: MatSnackBar,
     public customerPageService:CustomerPageComponent
-  ) { }
+  ) { 
 
-  @Input() editCustomerInformation!: any;
+  } 
 
   firstName:string = ""
 
-  editCustomerFromGroup: UntypedFormGroup = this.fb.group({
-      firstName: this.fb.control(""),
-      lastName: this.fb.control(""),
-      companyName: this.fb.control(""),
-      emailAddress:this.fb.control(""),
-      active:this.fb.control("")
+  editCustomerFromGroup:FormGroup = this.fb.group({
+    firstName: ["",[Validators.required,Validators.minLength(1)]],
+        lastName: ["",[Validators.required,Validators.minLength(1)]],
+        companyName: ["",[Validators.required,Validators.minLength(1)]],
+        emailAddress:["",[Validators.required,Validators.email]],
+        active:[true]
   });
 
 
-  ngOnInit(): void {
-    setTimeout(() => {
+  ngOnInit(): void {    
       this.editCustomerFromGroup = this.fb.group({
-        firstName: this.fb.control(this.editCustomerInformation.firstName,[Validators.required,Validators.minLength(1)]),
-        lastName: this.fb.control(this.editCustomerInformation.lastName,[Validators.required,Validators.minLength(1)]),
-        companyName: this.fb.control(this.editCustomerInformation.companyName,[Validators.required,Validators.minLength(1)]),
-        emailAddress:this.fb.control(this.editCustomerInformation.emailAddress,[Validators.required,Validators.email]),
-        active:this.fb.control(this.editCustomerInformation.active)
+        firstName: [this.editCustomerInformation.firstName,[Validators.required,Validators.minLength(1)]],
+        lastName: [this.editCustomerInformation.lastName,[Validators.required,Validators.minLength(1)]],
+        companyName: [this.editCustomerInformation.companyName,[Validators.required,Validators.minLength(1)]],
+        emailAddress:[this.editCustomerInformation.emailAddress,[Validators.required,Validators.email]],
+        active:[this.editCustomerInformation.active]
       })
-    })
   }
 
   editCustomer() {
@@ -71,14 +69,14 @@ export class EditCustomerComponent implements OnInit  {
 
           let message: string = responseObject.message;
 
-          // isSuccess == true ? this._snackBar.open(message, "Dismiss") : null
+          isSuccess == true ? this._snackBar.open(message, "Dismiss") : null
 
           this.customerPageService.getCustomerDetails();
 
         }, (error) => {
           console.log(error)
           this.navServices.hidePopups();
-          // this._snackBar.open(error.message,"Dismiss")
+          this._snackBar.open(error.message,"Dismiss")
         });
     }
   }

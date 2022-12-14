@@ -34,7 +34,7 @@
   </div>
 
   <div id="edit-customer">
-    <app-edit-customer [editCustomerInformation]="customerInformation"></app-edit-customer>
+    <app-edit-customer *ngIf="customerInformation" [editCustomerInformation]="customerInformation"></app-edit-customer>
   </div>
 
   <div id="delete-customer">

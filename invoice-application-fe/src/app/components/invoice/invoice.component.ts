@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Input, Inject } from '@angular/core';
-// import { MatLegacyTable as MatTable } from '@angular/material/legacy-table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InvoicesService } from 'src/app/services/invoices.service';
 import { DateAdapter } from '@angular/material/core';
@@ -11,6 +10,7 @@ import { PopUpService } from 'src/app/services/pop-up.service';
 
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { MatTable } from '@angular/material/table';
 
 
 
@@ -58,8 +58,8 @@ export class InvoiceComponent implements OnInit {
 
 
 
-  // @ViewChild(MatTable)
-  // table!: MatTable<InvoiceDetails>;
+  @ViewChild(MatTable)
+  table!: MatTable<InvoiceDetails>;
 
   constructor(
     private route: ActivatedRoute,
