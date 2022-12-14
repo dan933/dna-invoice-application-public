@@ -11,6 +11,7 @@ import { PopUpService } from 'src/app/services/pop-up.service';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { MatTable } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -69,7 +70,7 @@ export class InvoiceComponent implements OnInit {
     private dateAdapter: DateAdapter<Date>,
     public fb: UntypedFormBuilder,
     public popUpService: PopUpService,
-    // private _matSnackBar:MatSnackBar,
+    private _matSnackBar:MatSnackBar,
   ) {
     this.dateAdapter.setLocale('en-GB');
   }
@@ -123,7 +124,7 @@ export class InvoiceComponent implements OnInit {
       price: 0
     });
 
-    // this.table.renderRows();
+    this.table.renderRows();
   }
 
   removeItem(item: any) {
@@ -137,7 +138,7 @@ export class InvoiceComponent implements OnInit {
 
     this.dataSource = this.dataSource.filter(obj => obj !== item);
 
-    // this.table.renderRows();
+    this.table.renderRows();
   }
 
   save() {
@@ -167,19 +168,19 @@ export class InvoiceComponent implements OnInit {
 
           newItems.forEach((item, index) => { item.id = invoiceDatailsArray[index].id, console.log(item) });
 
-          // this._matSnackBar.open(apiData.message, "Dismiss");
+          this._matSnackBar.open(apiData.message, "Dismiss");
         }, (error) => {
-          // this._matSnackBar.open(error.message, "Dismiss");
+          this._matSnackBar.open(error.message, "Dismiss");
         }) : null;
 
     existingItems.length > 0 ? this.invoicesService.editInvoiceDetail(existingItems)
       .subscribe(data => {
         let apiData: any = data;
-        // this._matSnackBar.open(apiData.message, "Dismiss");
+        this._matSnackBar.open(apiData.message, "Dismiss");
 
       },
       (error) => {
-        // this._matSnackBar.open(error.message, "Dismiss");
+        this._matSnackBar.open(error.message, "Dismiss");
       }) : null;
 
 

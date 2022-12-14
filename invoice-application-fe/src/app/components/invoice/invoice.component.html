@@ -20,7 +20,7 @@
 
   </div>
 
-  <form>
+  <form class="invoice-filter-container">
     <mat-form-field appearance="outline">
       <mat-label>Invoice Date</mat-label>
       <input matInput required [matDatepicker]="picker" [(ngModel)]="invoiceDate" [value]="invoiceDate" name="invoiceDate">
@@ -28,23 +28,24 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <label id="gst-radio-group-label">GST:</label>
+    
     <mat-radio-group name="gst"
       aria-labelledby="gst-radio-group-label"
       class="gst-radio-group"
       [(ngModel)]="isGST">
+      <label id="gst-radio-group-label">GST:</label>
       <mat-radio-button class="gst-radio-button" *ngFor="let gstItem of gstOptions" [value]="gstItem">
         {{gstItem}}
       </mat-radio-button>
     </mat-radio-group>
 
-    <span class="line-down"></span>
+    <span class="line-down">|</span>
 
-    <label id="paid-radio-group-label">Paid:</label>
     <mat-radio-group name="paid"
-      aria-labelledby="paid-radio-group-label"
-      class="paid-radio-group"
-      [(ngModel)]="isPaid">
+    aria-labelledby="paid-radio-group-label"
+    class="paid-radio-group"
+    [(ngModel)]="isPaid">
+    <label id="paid-radio-group-label">Paid:</label>
       <mat-radio-button class="paid-radio-button" *ngFor="let paidItem of paidOptions" [value]="paidItem">
         {{paidItem}}
       </mat-radio-button>
