@@ -6,9 +6,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 //----------- Table Styling ----------------------
 .table-container
 {
-  max-width: 100%;
-  padding:10px;
-
+  padding-right: 20px;
+  width: 1000px;
+  max-height: 80vh;
+  overflow: auto;
+  max-width: 93vw;
+  // overflow: auto;
   .hover-table:hover td{
     background-color: #3f51b5;
     cursor: pointer;
@@ -69,19 +72,15 @@ span.line-down{
 
 //-------------------- sorting styles for datatables -----------------------//
 th.sort-header {
-  padding-top:10px !important;
-  padding-left: 10px !important;
-  padding-right: 5px !important;
-  padding-bottom: 3px !important;
-  vertical-align: top !important;
-  white-space: nowrap !important;
-  font-size: 20px !important;
+  padding-top:10px;
+  padding-left: 10px;
+  padding-right: 5px;
+  padding-bottom: 3px;
+  vertical-align: top;
+  background-color: white;
+  white-space: nowrap;
+  font-size: 20px;
   cursor: pointer;
-
-  z-index: 1 !important;
-
-  top: 111px !important;
-
 
   .mat-icon{
     transition: all 0.4s ease-in-out !important;
@@ -103,9 +102,9 @@ th.sort-header {
 
 
 
-@media only screen and (max-width: 285.69px) {
-  .table-container .mat-header-cell
-  {
-    top: 56px !important;
-  }
-}
+// @media only screen and (max-width: 285.69px) {
+//   .table-container .mat-header-cell
+//   {
+//     top: 56px !important;
+//   }
+// }

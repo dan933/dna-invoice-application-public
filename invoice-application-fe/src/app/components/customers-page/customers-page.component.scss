@@ -1,6 +1,29 @@
-#add-customer
-{
-  position: relative;
+.customers-container{
+  display: grid;
+  padding: 5px;
+  justify-content: center;
+  margin-left: auto;
+  margin-right:auto;
+  width: 93vw;
+
+  .customers-header-section{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    flex-wrap: wrap;
+
+    .button-section{
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      word-wrap: break-word;
+    }
+  }
+  
+  .paginator{
+    padding-bottom: 7px;
+  }
 }
 
 #create-customer-button
@@ -8,6 +31,8 @@
   text-align: left;
   margin-top: 10px;
   margin-bottom: 15px;
+  padding: 20px;
+  min-height: fit-content;
 }
 
 div{
@@ -17,6 +42,11 @@ div{
   }
 }
 
-.table-section{
-  min-width: 100%;
+
+
+@media screen and (max-width:258px){
+  .customers-container{
+    display: block;
+  }
 }
+

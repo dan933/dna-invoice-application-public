@@ -1,17 +1,13 @@
-﻿using System;
+﻿using DNA_API.DB;
+using DNA_API.Models;
+using DNA_API.Models.Customers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using DNA_API.DB;
-using DNA_API.Models;
-using Microsoft.Data.SqlClient;
-using DNA_API.Models.Customers;
-using System.Reflection;
 using System.Linq.Expressions;
-using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace DNA_API.Controllers
 {
@@ -25,17 +21,17 @@ namespace DNA_API.Controllers
         {
             _context = context;
         }
-     
+
         [HttpPost]
         public async Task<ActionResult<CustomerResponse>> createCustomers([FromBody] List<Customer> customers)
         {
             try
             {
-                 //todo check if customer already exists with email address
-                customers.ForEach(i => _context.tbl_Customers.Add(i));            
+                //todo check if customer already exists with email address
+                customers.ForEach(i => _context.tbl_Customers.Add(i));
                 await _context.SaveChangesAsync();
 
-                var response = new CustomerResponse(customers,true,"Customers successfully added");
+                var response = new CustomerResponse(customers, true, "Customers successfully added");
 
                 return Ok(response);
             }
@@ -44,12 +40,13 @@ namespace DNA_API.Controllers
 
                 return StatusCode(500, ex);
             }
-            
+
         }
 
         //edit customers
         [HttpPut]
-        public async Task<ActionResult<CustomerResponse>> editCustomers(List<Customer> customers){
+        public async Task<ActionResult<CustomerResponse>> editCustomers(List<Customer> customers)
+        {
             try
             {
                 var customersID = new List<int>();
@@ -62,9 +59,10 @@ namespace DNA_API.Controllers
                 Customer customer;
                 customers.ForEach((c) =>
                 {
-                    customer = customerList.Find(item =>item.Id == c.Id);
+                    customer = customerList.Find(item => item.Id == c.Id);
 
-                    if(customer != null){
+                    if (customer != null)
+                    {
                         customer.FirstName = c.FirstName;
                         customer.LastName = c.LastName;
                         customer.CompanyName = c.CompanyName;
@@ -76,9 +74,9 @@ namespace DNA_API.Controllers
                     }
                 });
 
-                
 
-                var response = new CustomerResponse(customerList,true,"Edit Customer Successful");
+
+                var response = new CustomerResponse(customerList, true, "Edit Customer Successful");
 
                 _context.Dispose();
 
@@ -92,7 +90,8 @@ namespace DNA_API.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult<CustomerResponse>> deleteCustomers(List<int> customerIDList){
+        public async Task<ActionResult<CustomerResponse>> deleteCustomers(List<int> customerIDList)
+        {
             try
             {
                 //Get customers to delete
@@ -104,7 +103,7 @@ namespace DNA_API.Controllers
                 var invoicesToDelete = await _context.tbl_Invoices
                 .Where(invoice => customerIDList.Contains(invoice.CustomerID))
                 .ToListAsync();
-                
+
 
                 //Get InvoiceDetails Associated with Customers
                 var invoiceDetilsToDelete = await _context.tbl_Services
@@ -129,8 +128,8 @@ namespace DNA_API.Controllers
             }
             catch (Exception exc)
             {
-                
-                return StatusCode(500,exc);
+
+                return StatusCode(500, exc);
             }
         }
 
@@ -152,9 +151,11 @@ namespace DNA_API.Controllers
                 {
                     search = item => item.Id == item.Id;
 
-                }else{
+                }
+                else
+                {
 
-                    search = item => 
+                    search = item =>
                     item.Id.ToString().StartsWith(pagedRequest.Search) || item.FirstName.StartsWith(pagedRequest.Search)
                     || item.LastName.StartsWith(pagedRequest.Search) || item.CompanyName.StartsWith(pagedRequest.Search)
                     || item.EmailAddress.StartsWith(pagedRequest.Search) || item.PhoneNumber.StartsWith(pagedRequest.Search);
@@ -200,7 +201,8 @@ namespace DNA_API.Controllers
 
                 int pageSize = (int)(pagedRequest.PageSize != null ? pagedRequest.PageSize : 10);
 
-                if( pagedRequest.isActive == null && pagedRequest.AscDesc == true) {
+                if (pagedRequest.isActive == null && pagedRequest.AscDesc == true)
+                {
                     //source https://codewithmukesh.com/blog/pagination-in-aspnet-core-webapi/
                     customers = await _context.tbl_Customers
                     .Where(search)
@@ -209,11 +211,13 @@ namespace DNA_API.Controllers
                     .Take(pageSize)
                     .ToListAsync();
 
-                     totalRecords = await _context.tbl_Customers
-                     .Where(search)                    
-                    .CountAsync();
+                    totalRecords = await _context.tbl_Customers
+                    .Where(search)
+                   .CountAsync();
 
-                }else if( pagedRequest.isActive == null && pagedRequest.AscDesc == false ){
+                }
+                else if (pagedRequest.isActive == null && pagedRequest.AscDesc == false)
+                {
 
                     //source https://codewithmukesh.com/blog/pagination-in-aspnet-core-webapi/
                     customers = await _context.tbl_Customers
@@ -227,7 +231,9 @@ namespace DNA_API.Controllers
                     .Where(search)
                     .CountAsync();
 
-                }else if (pagedRequest.AscDesc == true){
+                }
+                else if (pagedRequest.AscDesc == true)
+                {
 
                     //source https://codewithmukesh.com/blog/pagination-in-aspnet-core-webapi/
                     customers = await _context.tbl_Customers
@@ -244,7 +250,9 @@ namespace DNA_API.Controllers
                     .CountAsync();
 
 
-                }else {
+                }
+                else
+                {
 
                     //source https://codewithmukesh.com/blog/pagination-in-aspnet-core-webapi/
                     customers = await _context.tbl_Customers
@@ -259,19 +267,19 @@ namespace DNA_API.Controllers
                     .Where(customer => customer.Active == pagedRequest.isActive)
                     .Where(search)
                     .CountAsync();
-                }              
+                }
 
                 var pagedResponse = new PagedResponse<List<Customer>>(
                     customers, true, "Customers successfully returned", pageNumber, pageSize, totalRecords);
 
-                return Ok(pagedResponse);                
+                return Ok(pagedResponse);
             }
             catch (Exception ex)
             {
 
                 return StatusCode(500, ex);
             }
-           
+
         }
 
         //todo change this endpoint
@@ -281,7 +289,8 @@ namespace DNA_API.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
-        public async Task<ActionResult<CustomerResponse>> getCustomerByID(int id){
+        public async Task<ActionResult<CustomerResponse>> getCustomerByID(int id)
+        {
 
             try
             {
@@ -305,7 +314,7 @@ namespace DNA_API.Controllers
             {
                 return StatusCode(500, ex);
             }
-                
+
         }
     }
 }

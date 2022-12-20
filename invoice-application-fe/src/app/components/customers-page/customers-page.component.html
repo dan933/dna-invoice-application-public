@@ -1,27 +1,32 @@
-<div id="add-customer">
-  <app-add-customer></app-add-customer>
-</div>
 
 <div class="customers-container">
 
+  <!-- todo use mat-dialog-box-instead of custom -->
+  <div id="add-customer">
+    <app-add-customer></app-add-customer>
+  </div>
 
-  <button id="create-customer-button" class="space-right" mat-raised-button color="primary" (click)="showNewCustomerForm()">New Customer</button>
+  <div class="customers-header-section">
+    <div class="button-section">
+      <button id="create-customer-button" class="space-right" mat-raised-button color="primary" (click)="showNewCustomerForm()">New Customer</button>
+      
+      <label for="showInactive">
+        <input id="showInactive" [value]="showInactive" (click)="toggleShowInactive()" [attr.checked]="showInactive ? 'checked': null"  type="checkbox">
+        <span>Show Inactive Customers</span>
+      </label>
+    </div>
+  </div>
 
-  <span class="line-down"></span>
 
-  <input id="showInactive" [value]="showInactive" (click)="toggleShowInactive()" [attr.checked]="showInactive ? 'checked': null"  type="checkbox">
-  <label for="showInactive"> Show Inactive Customers</label>
-
-  <br>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" (change)="searchCustomers()" placeholder="Ex. Joe" #input>
-  </mat-form-field>
 
   
 
   <div class="table-section">
+    <mat-form-field appearance="outline" class="filter-customer">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" (change)="searchCustomers()" placeholder="Ex. Joe" #input>
+    </mat-form-field>
+  
 
     <section class="mat-elevation-z8 table-container">
     <table  mat-table [dataSource]="dataSource">
@@ -73,8 +78,10 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-table" (click)="navCustomer(row.id)"></tr>
     </table>
-
+    </section>
+    
     <mat-paginator
+    class="mat-elevation-z8 paginator"
     [length]="totalRecords"
     [pageSize]="pageSize"
     [pageSizeOptions]="pageSizeOptions"
@@ -83,8 +90,6 @@
     [showFirstLastButtons]="true"
     aria-label="Select page">
     </mat-paginator>
-
-    </section>
   </div>
 
 

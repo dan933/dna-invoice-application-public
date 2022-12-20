@@ -1,0 +1,97 @@
+commit 62a1d284f23a0fd0161e9896f63d1287d93d6aa5
+Author: dan933 <dnadistrictservices@gmail.com>
+Date:   Wed Dec 14 12:38:55 2022 +1100
+
+    refactored invoice component
+
+commit 87ccd12254a1d25943d331f88a8867181c2ee980
+Author: dan933 <dnadistrictservices@gmail.com>
+Date:   Wed Dec 14 12:19:36 2022 +1100
+
+    refactor edit customer dialog
+    Todo use Angular material dialog box later on
+
+commit 055eac476b037d162b365acb5d41ec324d13bea7
+Author: dan933 <dnadistrictservices@gmail.com>
+Date:   Wed Dec 14 12:18:37 2022 +1100
+
+    Refactor Customers Component
+
+commit 2f3ba73a4fbe6671c724829ca8978ad0b97cec4a
+Author: dan933 <dnadistrictservices@gmail.com>
+Date:   Wed Dec 14 10:21:35 2022 +1100
+
+    updated to angular version 15
+    Refactored customer page
+
+commit 9cfca4cbddbbadcfc80af9ba34c1d706c6a0ff68
+Author: dan933 <dnadistrictservices@gmail.com>
+Date:   Wed Dec 14 09:05:16 2022 +1100
+
+    updated angular to version 15
+
+commit ccf93da2796330a45eb37d0e6a0659280e83fa51
+Author: dan933 <dnadistrictservices@gmail.com>
+Date:   Wed Dec 14 09:01:19 2022 +1100
+
+    Angular materials updated to version 14
+
+commit 8f8688b46799abf0d27882cfeb1a74def9c34bdc
+Author: dan933 <dnadistrictservices@gmail.com>
+Date:   Wed Dec 14 08:55:35 2022 +1100
+
+    updated to version 14
+
+commit f52f88bf0da6d2b8a9e9a8882c9ed4ea678446cd
+Author: dan933 <dnadistrictservices@gmail.com>
+Date:   Wed Dec 14 08:52:40 2022 +1100
+
+    updating to version 13
+
+commit a0b5f61ab445f04d5f8f9bafc77000ccaecdbd02
+Author: dan933 <dnadistrictservices@gmail.com>
+Date:   Wed Dec 14 08:43:42 2022 +1100
+
+    updated Angular materials to version 13
+
+commit be00bd82a6cac58c1de0bd85d4e026822907f93f
+Author: dan933 <dnadistrictservices@gmail.com>
+Date:   Wed Dec 14 08:40:07 2022 +1100
+
+    upgraded to version 14
+
+commit a0d3eb70ce13469bc7f08fef5271f83e29dd01a6
+Author: dan933 <dnadistrictservices@gmail.com>
+Date:   Wed Dec 14 08:22:58 2022 +1100
+
+    upgraded to version 13
+
+commit a0cec3775bb110b378bc21d227d54d5e468f4466
+Author: dan933 <dnadistrictservices@gmail.com>
+Date:   Wed Dec 14 08:09:20 2022 +1100
+
+    added sql connection for laptop
+
+commit f6d1ed419b9dd313b29d8eec98b0830ec03b717d
+Author: dan933 <69749413+dan933@users.noreply.github.com>
+Date:   Sun Jan 30 15:28:34 2022 +1100
+
+    Update README.md
+
+commit 5cec0f1a7c158534e072047fe3777b80f4b0ef3a
+Author: dan933 <69749413+dan933@users.noreply.github.com>
+Date:   Sat Jan 29 12:11:38 2022 +1100
+
+    Update README.md
+
+commit 73ba9d6fa0fbdf88d75a8a8d26dac91cefbff7c7
+Author: dan933 <69749413+dan933@users.noreply.github.com>
+Date:   Sat Jan 29 12:09:52 2022 +1100
+
+    created public repo removed personal information.
+
+commit 21cdb28c529b457f8888cdcbb965fc062b4cfaeb
+Author: dan933 <69749413+dan933@users.noreply.github.com>
+Date:   Sat Jan 29 12:05:47 2022 +1100
+
+    Initial commit

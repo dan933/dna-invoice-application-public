@@ -1,4 +1,4 @@
-<div id="customer-container">
+<div class="customer-container">
   <div id="customer-details">
     <div class="flex-item">
       <p>
@@ -41,13 +41,15 @@
     <app-delete-customer></app-delete-customer>
   </div>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" (change)="getCustomerInvoices()" placeholder="Ex. Joe" #input>
-  </mat-form-field>
 
-  <section class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" class="table-container">
+
+  <div class="table-section">
+    <mat-form-field appearance="outline">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" (change)="getCustomerInvoices()" placeholder="Ex. Joe" #input>
+    </mat-form-field>
+      <section class="mat-elevation-z8 table-container">
+    <table mat-table [dataSource]="dataSource">
       <!-- Position Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef class="mat-display-1 sort-header hover" id="id" #id (click)="sortColumn(id)">
@@ -89,16 +91,19 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-table" (click)="navInvoice(row.id)"></tr>
     </table>
-    <mat-paginator
-    [length]="totalRecords"
-    [pageSize]="pageSize"
-    [pageSizeOptions]="pageSizeOptions"
-    [pageIndex]="pageNumber"
-    (page)="handlePageEvent($event)"
-    [showFirstLastButtons]="true"
-    aria-label="Select page">
-    </mat-paginator>
   </section>
+  <mat-paginator
+  class="mat-elevation-z8 paginator"
+  [length]="totalRecords"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  [pageIndex]="pageNumber"
+  (page)="handlePageEvent($event)"
+  [showFirstLastButtons]="true"
+  aria-label="Select page">
+  </mat-paginator>
+  </div>
+
 </div>
 
 
