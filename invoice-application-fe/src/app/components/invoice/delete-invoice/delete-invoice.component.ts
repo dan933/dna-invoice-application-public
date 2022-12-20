@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { PopUpService } from 'src/app/services/pop-up.service';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { InvoicesService } from 'src/app/services/invoices.service';
 import { ActivatedRoute, Router } from '@angular/router';
 // import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { CustomerPageComponent } from 'src/app/components/customer-page/customer-page.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -13,25 +14,32 @@ import { CustomerPageComponent } from 'src/app/components/customer-page/customer
 })
 export class DeleteInvoiceComponent implements OnInit {
 
+  id: number[] = [];
+
+  customerId: any;
+
   constructor(
-    private _popUpService: PopUpService,
     private invoicesService: InvoicesService,
     private route: ActivatedRoute,
     private router: Router,
-    // private _snackBar: MatSnackBar,
-    public _customerPage:CustomerPageComponent
-  ) { }
+    private _snackBar: MatSnackBar,
+    public _customerPage:CustomerPageComponent,
+    public dialogRef: MatDialogRef<DeleteInvoiceComponent>,
+    @Inject(MAT_DIALOG_DATA) public data:any,
+  ) { 
 
-  id: number[] = [];
+    this.customerId = data.customerId;
+    this.id.push(data.invoiceId);
 
-  @Input() customerId: any;
+  }
+
+
 
   ngOnInit(): void {
-    this.id.push(parseInt(this.route.snapshot.paramMap.get('id')!));
   }
 
   onCancel() {
-    this._popUpService.hidePopups();
+    this.dialogRef.close();
   }
 
   onDeleteInvoice() {
@@ -40,17 +48,17 @@ export class DeleteInvoiceComponent implements OnInit {
     this.invoicesService.deleteInvoice(this.id)
       .subscribe((data) => {
 
-        this._popUpService.hidePopups();
         response = data;
         response = response.message;
 
         this.router.navigate([`/customer/${this.customerId}`])
 
-        // this._snackBar.open(response, "Dismiss");
+        this._snackBar.open(response);
+        this.dialogRef.close();
 
       }, (error) => {
-        this._popUpService.hidePopups();
-        // this._snackBar.open(error.message, "Dismiss");
+        this._snackBar.open(error.message);
+        this.dialogRef.close();
     })
   }
 

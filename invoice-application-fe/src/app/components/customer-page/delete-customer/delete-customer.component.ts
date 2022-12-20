@@ -35,8 +35,8 @@ export class DeleteCustomerComponent implements OnInit {
     let deleteCustomerForm: CSSStyleDeclaration = document.getElementById('deleteCustomer')!.style;
     //hide delete customer form
     deleteCustomerForm != null ? deleteCustomerForm.display = 'none' : null;
-
-    this.navBarServices.hidePopups();
+    
+    this.dialogRef.close();
   }
 
   deleteCustomer() {

@@ -18,6 +18,7 @@ import { EditCustomerComponent } from './components/customer-page/edit-customer/
 import { DeleteCustomerComponent } from './components/customer-page/delete-customer/delete-customer.component';
 import { DeleteInvoiceComponent } from './components/invoice/delete-invoice/delete-invoice.component';
 import { MatDialogRef } from '@angular/material/dialog';
+import { SidenavListComponent } from './components/nav-bar/sidenav-list/sidenav-list.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { MatDialogRef } from '@angular/material/dialog';
     InvoiceComponent,
     EditCustomerComponent,
     DeleteCustomerComponent,
-    DeleteInvoiceComponent
+    DeleteInvoiceComponent,
+    SidenavListComponent
   ],
   imports: [
     BrowserModule,

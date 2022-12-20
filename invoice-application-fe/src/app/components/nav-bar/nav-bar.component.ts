@@ -1,58 +1,49 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { PopUpService } from 'src/app/services/pop-up.service';
+import { Component, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ToggleNavService } from 'src/app/services/toggle-nav.service';
 
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+  styleUrls: ['./nav-bar.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NavBarComponent implements OnInit {
 
-  public isMobileLayout: boolean = false;
-  public subMenuToggle: boolean = false;
+  public screenWidth: any;
+  IsCompactNav!:boolean;
+
+  toggleStatus:boolean = false;
+
+
 
   constructor(
-    public popUpService: PopUpService
+    public toggleNavService:ToggleNavService
   ) { }
 
   ngOnInit(): void {
+    this.screenWidth = window.innerWidth;
+    this.IsCompactNav = this.screenWidth > 393 ? false : true;
+
+    this.toggleNavService.navToggledata.subscribe((resp) => {
+      this.toggleStatus = resp;
+      console.log(this.toggleStatus)
+    });
+  }
+
+  toggleSideNav(){
+    this.toggleStatus = !this.toggleStatus;
+    this.toggleNavService.toggleNav(this.toggleStatus);
   }
 
 
-  showCompactNav() {
-    //display nav content
-    var subMenu:CSSStyleDeclaration|null = document.getElementById('menu-list-container')!.style;
-    subMenu.display = "block";
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.screenWidth = window.innerWidth;
+    this.IsCompactNav = this.screenWidth > 393 ? false : true;
 
-    //source: https://www.w3schools.com/js/js_htmldom_animate.asp
-    //change width animation
-    let id:any = null;
-    let width = 0;
-
-    id = setInterval(frame, 4);
-
-    function frame() {
-      let background: CSSStyleDeclaration | null = document.getElementById('gray-background')!.style;
-
-      if (width == 70) {
-
-        //show background for compact nav-bar
-        background.opacity = '0.9';
-        background.display = 'block';
-
-        //stop incrementing width of compact-nav-bar
-        clearInterval(id);
-
-      } else {
-        //increment width of compact-nav-bar
-        width += 2;
-        subMenu!.width = width + "vw";
-      }
-    }
   }
 
-  hidePopups() {
-    this.popUpService.hidePopups();
-  }
+
+
 }

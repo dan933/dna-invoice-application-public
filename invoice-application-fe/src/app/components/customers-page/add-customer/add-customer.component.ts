@@ -4,9 +4,7 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 // import { MatLegacyFormFieldControl as MatFormFieldControl, MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 
 import { Customer } from 'src/app/models/customers-model';
-import { CustomersPageComponent } from 'src/app/components/customers-page/customers-page.component'
 import { CustomersService } from 'src/app/services/customers.service';
-import { PopUpService } from 'src/app/services/pop-up.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -29,8 +27,7 @@ export class AddCustomerComponent implements OnInit {
     private fb: UntypedFormBuilder,
     public customersService: CustomersService,
     public dialogRef: MatDialogRef<AddCustomerComponent>,
-    private _snackBar: MatSnackBar,
-    private _popUpService:PopUpService
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {

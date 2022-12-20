@@ -5,13 +5,14 @@ import { DateAdapter } from '@angular/material/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { CurrencyPipe, formatCurrency, formatDate } from '@angular/common';
 import { CustomersService } from 'src/app/services/customers.service';
-import { PopUpService } from 'src/app/services/pop-up.service';
 // import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { MatTable } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteInvoiceComponent } from './delete-invoice/delete-invoice.component';
 
 
 
@@ -30,7 +31,7 @@ export interface InvoiceDetails {
 })
 export class InvoiceComponent implements OnInit {
 
-  id: string = "";
+  id: number = 0;
   dataSource:any[] = [];
   invoiceDetailsList:any;
   displayedColumns: string[] = ["details", "price", "qty", "sub-total", "bin"];
@@ -69,16 +70,16 @@ export class InvoiceComponent implements OnInit {
     public customerService: CustomersService,
     private dateAdapter: DateAdapter<Date>,
     public fb: UntypedFormBuilder,
-    public popUpService: PopUpService,
     private _matSnackBar:MatSnackBar,
+    public dialog: MatDialog
   ) {
     this.dateAdapter.setLocale('en-GB');
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id')!;
+    this.id = +this.route.snapshot.paramMap.get('id')!;
 
-    this.invoicesService.getInvoiceHeader(parseInt(this.id))
+    this.invoicesService.getInvoiceHeader(this.id)
       .subscribe(
         (data) => {
           let invoiceHeaderObject: any = data;
@@ -100,12 +101,23 @@ export class InvoiceComponent implements OnInit {
       }, (error) => { alert('something went wrong with the API')}
     )
 
-    this.invoicesService.getInvoice(parseInt(this.id))
+    this.invoicesService.getInvoice(this.id)
       .subscribe(
         data => {
           this.getInvoiceDetails(data);
         });
 
+  }
+
+  openDeleteInvoiceDialog(){
+
+    const dialogRef = this.dialog.open(DeleteInvoiceComponent, {
+      data: {customerId:this.customerId,invoiceId: this.id},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+    })
   }
 
   getInvoiceDetails(data: any) {
@@ -117,7 +129,7 @@ export class InvoiceComponent implements OnInit {
   addItem() {
 
     this.dataSource.push({
-      invoiceID: parseInt(this.id),
+      invoiceID: this.id,
       details: "",
       qty: 0,
       price: 0
@@ -183,7 +195,7 @@ export class InvoiceComponent implements OnInit {
 
 
     let invoiceHeaderObject = {
-      id:parseInt(this.id),
+      id:this.id,
       invoiceDate: formatDate(this.invoiceDate.toISOString(), "YYYY-MM-dd", "en-AU"),
       customerID: parseInt(this.customerId),
       paid: this.isPaid == "Yes"? true : false,
@@ -199,14 +211,6 @@ export class InvoiceComponent implements OnInit {
       })
 
       this.invoiceCalculation = this.calculateTotal();
-  }
-
-  showDeleteInvoiceForm() {
-
-    this.popUpService.showGrayBackground();
-
-    let deleteFrom: CSSStyleDeclaration = document.getElementById('deleteInvoice')!.style;
-    deleteFrom.display = 'block';
   }
 
   calculateTotal() {

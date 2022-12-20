@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-// import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CustomersService } from 'src/app/services/customers.service';
 import { ToggleSortService } from 'src/app/services/toggle-sort.service';
@@ -10,7 +9,8 @@ import { AddCustomerComponent } from './add-customer/add-customer.component';
 @Component({
   selector: 'app-customers-page',
   templateUrl: './customers-page.component.html',
-  styleUrls: ['./customers-page.component.scss']
+  styleUrls: ['./customers-page.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CustomersPageComponent implements OnInit {
 

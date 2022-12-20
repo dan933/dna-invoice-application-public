@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace DNA_API.Controllers
@@ -66,7 +65,7 @@ namespace DNA_API.Controllers
             {
                 PagedResponse<List<ViewInvoice>> response;
 
-                 List<ViewInvoice> customerInvoices;                
+                List<ViewInvoice> customerInvoices;                
 
                 var isCustomer = await _context.tbl_Customers
                 .FirstOrDefaultAsync(customer => customer.Id == id) != null ? true : false;
@@ -175,10 +174,6 @@ namespace DNA_API.Controllers
 
                     return Ok(invoiceResponse);
                 }
-
-                
-
-                
 
                 invoiceResponse = new Response<Invoice>(null, false, "Something went wrong");
                 return Ok(invoiceResponse);

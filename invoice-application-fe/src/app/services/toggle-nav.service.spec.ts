@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PopUpService } from './pop-up.service';
+import { ToggleNavService } from './toggle-nav.service';
 
-describe('PopUpServiceService', () => {
-  let service: PopUpService;
+describe('ToggleNavService', () => {
+  let service: ToggleNavService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PopUpService);
+    service = TestBed.inject(ToggleNavService);
   });
 
   it('should be created', () => {

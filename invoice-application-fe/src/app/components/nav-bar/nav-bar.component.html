@@ -1,30 +1,16 @@
+<mat-toolbar color="primary">
+  <button *ngIf="IsCompactNav" mat-icon-button class="hamburger-menu" (click)="toggleSideNav()" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Invoice App</span>
 
-<!-- <mat-toolbar class="large-nav-bar" color="primary">
-  <mat-toolbar-row>
-    <span>Invoicing Application</span>
-  </mat-toolbar-row>
-  <mat-toolbar-row>
-    <a class="hover-button margin-right larg-nav-buttons" routerLink="/customers" routerLinkActive="active" mat-flat-button color="primary">
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="customers icon">account_circle</mat-icon>
-      <span>Customers</span>
-    </a>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-
-<mat-toolbar class="compact-nav-container" id="compact-nav-container" color="primary">
-  <mat-toolbar-row>
-    <mat-icon id="show-menu-button" class="hover-button margin-right" (click)="showCompactNav()">menu</mat-icon>
-    <span>Invoicing Application</span>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-<div id="menu-list-container">
-  <button class="hover-button compact-nav-button" routerLink="/customers" routerLinkActive="active-grey">
+  <a mat-raised-button
+  routerLink="/customers"
+  routerLinkActive="active-link"
+  class="nav-button"
+  *ngIf="!IsCompactNav"
+  >
     <mat-icon aria-hidden="true" aria-label="Go to customers page">account_circle</mat-icon>
     <span>Customers</span>
-  </button>
-</div>
-<div id="gray-background" (click)="hidePopups()">
-</div> -->
-
+  </a>
+</mat-toolbar>

@@ -8,9 +8,9 @@ namespace DNA_API.Helpers
     {
         internal static Expression<Func<ViewInvoice, bool>> CustomerInvoicesQuery(string searchString) {
 
-            Expression<Func<ViewInvoice, bool>> search = null;  
+            Expression<Func<ViewInvoice, bool>> search = null; 
 
-             DateTime dateValue;          
+            DateTime dateValue;          
 
             DateTime.TryParse(searchString, out dateValue);
 

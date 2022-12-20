@@ -28,7 +28,7 @@ namespace DNA_API
             services.AddCors(c =>  
             {  
                 c.AddDefaultPolicy(options => options
-                .WithOrigins("http://localhost:4200","http://localhost:5000","https://localhost:5001")
+                .WithOrigins("http://localhost:4200")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 );  

@@ -1,9 +1,46 @@
+.invoice-container{
+  display: grid;
+  padding: 5px;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 92vw;
+}
+
+
+@media screen and (max-width:300px){
+  .invoice-container{
+    display: block;
+  }
+}
+
+.table-container{
+  padding-right: 0px;
+}
+
+.item-qty{
+  width: 100px;
+}
+
+.item-price{
+  width:200px;
+}
+
+
+.table-section{
+  max-width: 93vw;
+  width: 600px;
+  padding:15px;
+  overflow: auto;
+}
+
+
 .invoice-filter-container{
   display: flex;
   flex-wrap: wrap;
   column-gap: 10px;
   align-items: center;
-  max-width: 99vw;
+  max-width: 93vw;
 }
 
 #add-invoice-item{
@@ -19,14 +56,12 @@
 td input
 {
   font-size: 30px;
-  width: 300px;
 }
 
 #invoice-header{
   margin-bottom: 10px;
   position: relative;
-  width: 98vw;
-  min-width:min-content;
+  width: fit-content;
   border: 1.5px solid black;
   border-radius: 5px;
   font-size: 1.3rem;
@@ -90,19 +125,3 @@ div.invoice-footer{
                 0px 3px 14px 2px rgb(0 0 0 / 12%);
   }
 }
-
-
-#invoice-table{
-  th{
-    top: 112px !important;
-    z-index: 1 !important;
-  }
-
-  @media only screen and (max-width: 285.69px) {
-    th
-    {
-      top: 56px !important;
-    }
-  }
-}
-

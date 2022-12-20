@@ -1,4 +1,4 @@
-<div id="invoice-container">
+<div class="invoice-container">
   <div id="invoice-header">
     <div>
       <span><label>Invoice Number:</label> INV{{invoiceNumber}}</span>
@@ -53,51 +53,54 @@
 
     <span class="line-down"></span>
 
-    <button class="red-button space-right space-bottom" id="delete-invoice" mat-raised-button (click)="showDeleteInvoiceForm()">Delete Invoice</button>
+    <button class="red-button space-right space-bottom" id="delete-invoice" mat-raised-button (click)="openDeleteInvoiceDialog()">Delete Invoice</button>
 
     <span class="line-down"></span>
 
     <button class="green-button space-right space-bottom" id="delete-invoice" mat-raised-button (click)="downloadPDF()">Download Invoice</button>
   </form>
 
-  <app-delete-invoice [customerId]="customerId"></app-delete-invoice>
+  <section class="table-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <!-- Position Column -->
+      <ng-container matColumnDef="details">
+        <th mat-header-cell *matHeaderCellDef class="mat-display-1">Details</th>
+        <td mat-cell *matCellDef="let element">
+          <input class="item-details" type="text" value="{{element.details}}">
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef class="mat-display-1">Price</th>
+        <td mat-cell *matCellDef="let element">
+          <input class="item-price" type="number" value="{{ element.price }}">
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="qty">
+        <th mat-header-cell *matHeaderCellDef class="mat-display-1">quantity</th>
+        <td mat-cell *matCellDef="let element">
+          <input class="item-qty" type="number" value="{{ element.qty }}">
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="sub-total">
+        <th mat-header-cell *matHeaderCellDef class="mat-display-1">Line Total</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.price != null ? "$"+(element.price * element.qty) : "null"}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="bin">
+        <th mat-header-cell *matHeaderCellDef class="bin"></th>
+        <td mat-cell *matCellDef="let element"><mat-icon mat-cell aria-label="customers icon" (click)="removeItem(element)">delete</mat-icon></td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-table"></tr>
+    </table>
+  </section>
 
-  <table mat-table [dataSource]="dataSource" id="invoice-table" class="mat-elevation-z8 table-container ">
-    <!-- Position Column -->
-    <ng-container matColumnDef="details">
-      <th mat-header-cell *matHeaderCellDef class="mat-display-1">Details</th>
-      <td mat-cell *matCellDef="let element">
-        <input class="item-details" type="text" value="{{element.details}}">
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef class="mat-display-1">Price</th>
-      <td mat-cell *matCellDef="let element">
-        <input class="item-price" type="number" value="{{ element.price }}">
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="qty">
-      <th mat-header-cell *matHeaderCellDef class="mat-display-1">quantity</th>
-      <td mat-cell *matCellDef="let element">
-        <input class="item-qty" type="number" value="{{ element.qty }}">
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="sub-total">
-      <th mat-header-cell *matHeaderCellDef class="mat-display-1">Total</th>
-      <td mat-cell *matCellDef="let element">
-        {{element.price != null ? "$"+(element.price * element.qty) : "null"}}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="bin">
-      <th mat-header-cell *matHeaderCellDef class="bin"></th>
-      <td mat-cell *matCellDef="let element"><mat-icon mat-cell aria-label="customers icon" (click)="removeItem(element)">delete</mat-icon></td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-table"></tr>
-  </table>
+  <form>
+    <button id="add-invoice-item" class="space-right" mat-raised-button (click)="addItem()">Add Item</button>
+    <button id="save" mat-raised-button color="primary" (click)="save()">Save</button>
 
-  <button id="add-invoice-item" class="space-right" mat-raised-button (click)="addItem()">Add Item</button>
-  <button id="save" mat-raised-button color="primary" (click)="save()">Save</button>
+  </form>
 
   <div class="invoice-footer">
     <div class="invoice-calculations">

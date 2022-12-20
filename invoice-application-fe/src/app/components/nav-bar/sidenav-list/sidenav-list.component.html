@@ -1,0 +1,13 @@
+<mat-selection-list role="list" [multiple]="false">
+    <mat-list-option role="listitem"
+    mat-raised-button
+    routerLink="/customers"
+    routerLinkActive="active-link"
+    (click)="toggleSideNav()"
+    >
+    <div class="side-nav">
+        <mat-icon aria-hidden="true" aria-label="Go to customers page">account_circle</mat-icon>
+        <span>Customers</span>
+    </div>
+    </mat-list-option>
+  </mat-selection-list>

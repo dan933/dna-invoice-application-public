@@ -25,9 +25,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatListModule} from '@angular/material/list';
 
 
 const modules = [
+  MatListModule,
   MatToolbarModule,
   MatIconModule,
   MatButtonModule,
