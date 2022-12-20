@@ -44,7 +44,6 @@ export class AddCustomerComponent implements OnInit {
     if (this.addCustomerForm.valid)
     {
       customer = this.addCustomerForm.value;
-      console.log(customer);
       customer.firstName = customer.firstName[0].toUpperCase() + customer.firstName.slice(1);
       customer.lastName = customer.lastName[0].toUpperCase() + customer.lastName.slice(1);
       customer.emailAddress = customer.emailAddress.toLowerCase();

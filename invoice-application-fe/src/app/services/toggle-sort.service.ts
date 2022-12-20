@@ -56,7 +56,6 @@ export class ToggleSortService {
   }
 
   showArrowSorted(sortColumn: string, ascDesc: string) {
-    console.log(ascDesc)
     let columnHeaders:NodeListOf<HTMLStyleElement> = document.querySelectorAll('th.sort-header');
     columnHeaders.forEach((item) => {
       if (item.id == sortColumn) {

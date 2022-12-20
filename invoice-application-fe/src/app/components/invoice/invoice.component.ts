@@ -109,7 +109,6 @@ export class InvoiceComponent implements OnInit {
   }
 
   getInvoiceDetails(data: any) {
-    console.log(data)
     this.invoiceDetailsList = data;
     this.dataSource = this.invoiceDetailsList.invoiceDetails;
     this.invoiceCalculation = this.calculateTotal();
@@ -133,7 +132,6 @@ export class InvoiceComponent implements OnInit {
 
     this.invoicesService.deleteInvoiceDetails(itemArray)
       .subscribe((data) => {
-        console.log(data);
       });
 
     this.dataSource = this.dataSource.filter(obj => obj !== item);
@@ -166,7 +164,7 @@ export class InvoiceComponent implements OnInit {
           let apiData: any = data;
           let invoiceDatailsArray: any[] = apiData.invoiceDetails;
 
-          newItems.forEach((item, index) => { item.id = invoiceDatailsArray[index].id, console.log(item) });
+          newItems.forEach((item, index) => { item.id = invoiceDatailsArray[index].id});
 
           this._matSnackBar.open(apiData.message, "Dismiss");
         }, (error) => {
@@ -194,7 +192,6 @@ export class InvoiceComponent implements OnInit {
 
     this.invoicesService.editInvoiceHeader(invoiceHeaderObject)
       .subscribe((data:any) => {
-        console.log(data);
         let gst = data.data.gst;
 
         this.toggleGSTColor(gst);
@@ -245,8 +242,6 @@ export class InvoiceComponent implements OnInit {
   }
 
   downloadPDF() {
-
-    console.log(this.invoiceNumber)
 
     let dataBody: any[] = this.createTableRows();
 

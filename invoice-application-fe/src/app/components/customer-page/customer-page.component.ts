@@ -10,6 +10,9 @@ import { InvoicesService } from 'src/app/services/invoices.service';
 import { ToggleSortService } from 'src/app/services/toggle-sort.service';
 // import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteCustomerComponent } from './delete-customer/delete-customer.component';
 
 export interface CustomerInvoices {
   invoiceNumber: string;
@@ -55,8 +58,9 @@ export class CustomerPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public invoicesService: InvoicesService,
-    // private _snackBar: MatSnackBar,
-    public toggleService:ToggleSortService
+    private _snackBar: MatSnackBar,
+    public toggleService:ToggleSortService,
+    public dialog: MatDialog
   ) { }
 
 
@@ -70,10 +74,15 @@ export class CustomerPageComponent implements OnInit {
     this.getCustomerInvoices()
   }
 
+  openDeleteCustomerDialog():void {
+    const dialogRef = this.dialog.open(DeleteCustomerComponent, {
+      data:{customerId:this.id}
+    });
+  }
+
   //navigate to specific customer page
   navInvoice(id: any) {
     this.router.navigate([`/invoice/${id}`])
-    console.log(id);
   }
 
   //get customer id
@@ -88,7 +97,6 @@ export class CustomerPageComponent implements OnInit {
         this.customerInformation = data;
         this.customerInformation = this.customerInformation.data;
         this.customerInformation.customerCode = this.customerInformation.companyName[0].toUpperCase() + this.customerInformation.id
-        console.log(this.customerInformation)
       }, () => alert("api is down"));
   }
 
@@ -127,7 +135,6 @@ export class CustomerPageComponent implements OnInit {
 
     this.invoiceService.createCustomerInvoice(newInvoiceObject)
       .then((data) => {
-        console.log(data)
 
         let responseObject:any = data
 
@@ -137,7 +144,7 @@ export class CustomerPageComponent implements OnInit {
 
         this.router.navigate([`/invoice/${invoiceID}`])
 
-        // this._snackBar.open(message,"Dismiss")
+        this._snackBar.open(message,"Dismiss")
 
       }, () => { alert("api is down") }
     )

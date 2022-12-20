@@ -61,11 +61,7 @@ export class EditCustomerComponent implements OnInit  {
 
           let isSuccess: boolean = responseObject.success;
 
-          console.log(isSuccess);
-
           this.navServices.hidePopups();
-
-          console.log(responseObject);
 
           let message: string = responseObject.message;
 
@@ -74,7 +70,6 @@ export class EditCustomerComponent implements OnInit  {
           this.customerPageService.getCustomerDetails();
 
         }, (error) => {
-          console.log(error)
           this.navServices.hidePopups();
           this._snackBar.open(error.message,"Dismiss")
         });
