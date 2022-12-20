@@ -29,14 +29,10 @@
 
   <div id="sub-nav-customer-page">
     <button class="space-top-bottom space-right green-button" id="create-customer-invoice-button" mat-raised-button color="primary" (click)="createCustomerInvoice()">New Invoice</button>
-    <button class="space-top-bottom space-right blue-button" id="edit-customer-button" mat-raised-button color="primary" (click)="showEditCustomerForm()">Edit Customer</button>
+    <button class="space-top-bottom space-right blue-button" id="edit-customer-button" mat-raised-button color="primary" (click)="openEditCustomerDialog()">Edit Customer</button>
     <button class="space-top-bottom red-button" id="delete-customer-button" mat-raised-button color="primary" (click)="openDeleteCustomerDialog()">Delete Customer</button>
   </div>
-
-  <div id="edit-customer">
-    <app-edit-customer *ngIf="customerInformation" [editCustomerInformation]="customerInformation"></app-edit-customer>
-  </div>
-
+  
   <div class="table-section">
     <mat-form-field appearance="outline">
       <mat-label>Filter</mat-label>

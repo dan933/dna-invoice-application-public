@@ -1,11 +1,11 @@
 #editCustomerForm{
-  position:absolute;
-  z-index: 10 !important;
-  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 10px;
+  width: 300px;
+  flex-direction: column;
   padding: 10px;
   align-self: center;
-  max-width:min-content;
-  left:40vw;
-  display: none;
   border-radius: 5px;
 }

@@ -1,5 +1,7 @@
-import { Component, Input, OnInit  } from '@angular/core';
+import { ThisReceiver } from '@angular/compiler';
+import { Component, Inject, Input, OnInit  } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomersService } from 'src/app/services/customers.service';
 import { NavBarComponent } from '../../nav-bar/nav-bar.component';
@@ -12,16 +14,18 @@ import { CustomerPageComponent } from '../customer-page.component';
 })
 export class EditCustomerComponent implements OnInit  {
 
-  @Input() editCustomerInformation!: any;
+  editCustomerInformation!: any;
 
   constructor(
     private fb: UntypedFormBuilder,
     public customerService: CustomersService,
     public navServices:NavBarComponent,
     private _snackBar: MatSnackBar,
-    public customerPageService:CustomerPageComponent
+    public customerPageService:CustomerPageComponent,
+    public dialogRef: MatDialogRef<EditCustomerComponent>,
+    @Inject(MAT_DIALOG_DATA) public data:any,
   ) { 
-
+    this.editCustomerInformation = this.data.customerInformation;
   } 
 
   firstName:string = ""
@@ -61,17 +65,15 @@ export class EditCustomerComponent implements OnInit  {
 
           let isSuccess: boolean = responseObject.success;
 
-          this.navServices.hidePopups();
-
           let message: string = responseObject.message;
 
           isSuccess == true ? this._snackBar.open(message, "Dismiss") : null
 
-          this.customerPageService.getCustomerDetails();
+          this.dialogRef.close(data);
 
         }, (error) => {
-          this.navServices.hidePopups();
-          this._snackBar.open(error.message,"Dismiss")
+          this.dialogRef.close();
+          this._snackBar.open(error.message,"Dismiss");
         });
     }
   }

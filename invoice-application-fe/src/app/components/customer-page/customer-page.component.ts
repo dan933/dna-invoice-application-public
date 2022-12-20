@@ -13,6 +13,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteCustomerComponent } from './delete-customer/delete-customer.component';
+import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 
 export interface CustomerInvoices {
   invoiceNumber: string;
@@ -31,7 +32,7 @@ export interface CustomerInvoices {
 
 export class CustomerPageComponent implements OnInit {
 
-  id: string = "";
+  id: number = 0;
   customerInformation: any;
 
 
@@ -80,6 +81,17 @@ export class CustomerPageComponent implements OnInit {
     });
   }
 
+  openEditCustomerDialog():void{
+    const dialogRef = this.dialog.open(EditCustomerComponent, {
+      data:{customerInformation:this.customerInformation}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+        this.id = result.customers[0].id;
+        this.getCustomerDetails();
+    })
+  }
+
   //navigate to specific customer page
   navInvoice(id: any) {
     this.router.navigate([`/invoice/${id}`])
@@ -87,12 +99,12 @@ export class CustomerPageComponent implements OnInit {
 
   //get customer id
   getCustomerID() {
-    this.id = this.route.snapshot.paramMap.get('id')!;
+    this.id = +this.route.snapshot.paramMap.get('id')!;
   }
 
   //get customer details
   getCustomerDetails() {
-    this.customersService.getCustomer(parseInt(this.id))
+    this.customersService.getCustomer(this.id)
       .subscribe((data) => {
         this.customerInformation = data;
         this.customerInformation = this.customerInformation.data;
@@ -102,7 +114,7 @@ export class CustomerPageComponent implements OnInit {
 
   //get customer invoices
   getCustomerInvoices() {
-    this.invoicesService.getCustomerInvoices(parseInt(this.id),this.query)
+    this.invoicesService.getCustomerInvoices(this.id,this.query)
       .subscribe((data: any) => {
 
         this.customerInvoices = data.data;
@@ -148,25 +160,6 @@ export class CustomerPageComponent implements OnInit {
 
       }, () => { alert("api is down") }
     )
-  }
-
-  showEditCustomerForm() {
-    let background: CSSStyleDeclaration | null = document.getElementById('gray-background')!.style;
-    background.opacity = '0.9';
-    background.display = 'block';
-
-    let editCustomerForm: CSSStyleDeclaration | null = document.getElementById('editCustomerForm')!.style;
-    editCustomerForm.display = 'block';
-  }
-
-  showDeleteCustomerForm() {
-    let background: CSSStyleDeclaration | null = document.getElementById('gray-background')!.style;
-    background.opacity = '0.9';
-    background.display = 'block';
-
-    let deleteCustomerForm: CSSStyleDeclaration | null = document.getElementById('deleteCustomer')!.style;
-
-    deleteCustomerForm.display = 'block';
   }
 
   applyFilter(event: Event) {
@@ -223,7 +216,5 @@ export class CustomerPageComponent implements OnInit {
 
 
   }
-
-
 
 }
