@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 // import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CustomersService } from 'src/app/services/customers.service';
 import { ToggleSortService } from 'src/app/services/toggle-sort.service';
+import { AddCustomerComponent } from './add-customer/add-customer.component';
 
 @Component({
   selector: 'app-customers-page',
@@ -40,12 +42,28 @@ export class CustomersPageComponent implements OnInit {
     public customersService: CustomersService,
     private router: Router,
     private route: ActivatedRoute,
-    public toggleService:ToggleSortService
+    public toggleService:ToggleSortService,
+    public dialog: MatDialog
   ) {
+  }
+
+  openNewCustomerDialog(): void {
+    const dialogRef = this.dialog.open(AddCustomerComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getCustomers();
+    });
+
   }
 
   ngOnInit(): void {
 
+    this.getCustomers();
+
+  }
+
+  getCustomers(){
     let checkParams = this.toggleService.checkParams;
 
     this.route.queryParams.subscribe(params => {
@@ -61,19 +79,8 @@ export class CustomersPageComponent implements OnInit {
       this.searchCustomers(params);
 
     }).unsubscribe();
-
   }
-
-  showNewCustomerForm() {
-    let form = document.getElementById('addCustomerForm');
-    form!.style.display = 'block';
-
-    let background: CSSStyleDeclaration | null = document.getElementById('gray-background')!.style;
-    background.opacity = '0.9';
-    background.display = 'block';
-
-  }
-
+  
   toggleShowInactive() {
     this.showInactive = !this.showInactive;
     this.searchCustomers();

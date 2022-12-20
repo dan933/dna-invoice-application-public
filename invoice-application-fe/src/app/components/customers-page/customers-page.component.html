@@ -1,14 +1,9 @@
 
 <div class="customers-container">
-
-  <!-- todo use mat-dialog-box-instead of custom -->
-  <div id="add-customer">
-    <app-add-customer></app-add-customer>
-  </div>
-
+  
   <div class="customers-header-section">
     <div class="button-section">
-      <button id="create-customer-button" class="space-right" mat-raised-button color="primary" (click)="showNewCustomerForm()">New Customer</button>
+      <button id="create-customer-button" class="space-right" mat-raised-button color="primary" (click)="openNewCustomerDialog()">New Customer</button>
       
       <label for="showInactive">
         <input id="showInactive" [value]="showInactive" (click)="toggleShowInactive()" [attr.checked]="showInactive ? 'checked': null"  type="checkbox">
@@ -79,7 +74,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-table" (click)="navCustomer(row.id)"></tr>
     </table>
     </section>
-    
+
     <mat-paginator
     class="mat-elevation-z8 paginator"
     [length]="totalRecords"

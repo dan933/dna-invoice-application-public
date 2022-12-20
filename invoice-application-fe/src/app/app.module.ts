@@ -17,6 +17,7 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
 import { EditCustomerComponent } from './components/customer-page/edit-customer/edit-customer.component';
 import { DeleteCustomerComponent } from './components/customer-page/delete-customer/delete-customer.component';
 import { DeleteInvoiceComponent } from './components/invoice/delete-invoice/delete-invoice.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { DeleteInvoiceComponent } from './components/invoice/delete-invoice/dele
   providers: [
     NavBarComponent,
     CustomersPageComponent,
-    CustomerPageComponent
+    CustomerPageComponent,
+    {provide: MatDialogRef, useValue:{}}
   ],
   bootstrap: [AppComponent]
 })
