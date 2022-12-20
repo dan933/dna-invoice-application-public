@@ -53,11 +53,13 @@
 
     <span class="line-down"></span>
 
-    <button class="red-button space-right space-bottom" id="delete-invoice" mat-raised-button (click)="openDeleteInvoiceDialog()">Delete Invoice</button>
-
-    <span class="line-down"></span>
-
-    <button class="green-button space-right space-bottom" id="delete-invoice" mat-raised-button (click)="downloadPDF()">Download Invoice</button>
+    <div>
+      <button class="red-button space-right space-bottom" id="delete-invoice" mat-raised-button (click)="openDeleteInvoiceDialog()">Delete Invoice</button>
+  
+      <span class="line-down"></span>
+  
+      <button class="green-button space-right space-bottom" id="download-invoice" mat-raised-button (click)="downloadPDF()">Download Invoice</button>
+    </div>
   </form>
 
   <section class="table-container mat-elevation-z8">
